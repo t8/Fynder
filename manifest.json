@@ -1,0 +1,6 @@
+  {
+    "name": "Fynder",
+    "version": "1.0",
+    "description": "Automatically finds the top 10 vocabulary words in any article of your choice!",
+    "manifest_version": 2
+  }
