@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bulma.css">
+    <script src="analyze.js"></script>
+</head>
+<body>
+<div class="hero is-light">
+    <div class="hero-body">
+        <div class="container">
+            <div class="notification is-danger">
+                Currently Calculating....
+            </div>
+            <center>
+                <img class="logo" src="https://www.gstatic.com/images/branding/product/1x/google_cloud_search_512dp.png">
+                <h1 class="title is-4">Fynder</h1>
+                <hr class="divider" />
+            </center>
+            <div class="card rounded">
+                <div class="card-content">
+                    <div class="content">
+                        <h6 class="title is-6">Top 10 Words</h6>
+                        <ul class="list">
+                            <li>Expedited</li>
+                            <li>Container</li>
+                            <li>Expedited</li>
+                            <li>Container</li>
+                            <li>Expedited</li>
+                            <li>Container</li>
+                            <li>Expedited</li>
+                            <li>Container</li>
+                            <li>Expedited</li>
+                            <li>Container</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="card rounded">
+                <div class="card-content">
+                    <div class="content">
+                        <h6 class="title is-6">Analytics</h6>
+                        <div class="tags is-medium">
+                            <div class="tags has-addons">
+                                <span class="tag">Word Count:</span>
+                                <span class="tag is-primary">1000</span>
+                            </div>
+                            <div class="tags has-addons">
+                                <span class="tag">Average Word Length:</span>
+                                <span class="tag is-info">3.65</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .logo {
+        width: 15%;
+        min-width: 60px;
+    }
+    .rounded {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+    }
+    .divider {
+        background-color: transparent;
+    }
+    .list li {
+        padding-left: 10px;
+    }
+    .logo-color {
+        /* Logo background color goes here */
+    }
+
+</style>
+</body>
+</html>

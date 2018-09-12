@@ -2,5 +2,18 @@
     "name": "Fynder",
     "version": "1.0",
     "description": "Automatically finds the top 10 vocabulary words in any article of your choice!",
+    "permissions": [
+      "activeTab",
+      "tabs",
+      "declarativeContent",
+      "storage"
+    ],
+    "background": {
+      "scripts": ["analyze.js"],
+      "persistent": false
+    },
+    "browser_action": {
+      "default_popup": "popup.html"
+    },
     "manifest_version": 2
   }
