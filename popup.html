@@ -10,7 +10,7 @@
 <div class="hero is-light">
     <div class="hero-body">
         <div class="container">
-            <div class="notification is-danger">
+            <div class="notification is-danger" id="banner">
                 Currently Calculating....
             </div>
             <center>
@@ -22,18 +22,7 @@
                 <div class="card-content">
                     <div class="content">
                         <h6 class="title is-6">Top 10 Words</h6>
-                        <ul class="list">
-                            <li>Expedited</li>
-                            <li>Container</li>
-                            <li>Expedited</li>
-                            <li>Container</li>
-                            <li>Expedited</li>
-                            <li>Container</li>
-                            <li>Expedited</li>
-                            <li>Container</li>
-                            <li>Expedited</li>
-                            <li>Container</li>
-                        </ul>
+                        <ul class="list" id="top"></ul>
                     </div>
                 </div>
             </div>
@@ -45,11 +34,11 @@
                         <div class="tags is-medium">
                             <div class="tags has-addons">
                                 <span class="tag">Word Count:</span>
-                                <span class="tag is-primary">1000</span>
+                                <span class="tag is-primary" id="count">0</span>
                             </div>
                             <div class="tags has-addons">
                                 <span class="tag">Average Word Length:</span>
-                                <span class="tag is-info">3.65</span>
+                                <span class="tag is-info" id="length">0</span>
                             </div>
                         </div>
                     </div>

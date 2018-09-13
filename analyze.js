@@ -1,4 +1,6 @@
-var allWords = [];
+let allWords = [];
+let longestWords = [];
+let avgWordLength = 0;
 
 chrome.extension.onMessage.addListener(function(words) {
     // Waiting for the return of the string
@@ -6,37 +8,82 @@ chrome.extension.onMessage.addListener(function(words) {
 });
 
 function separateTheCrap(palabra) {
-    // do analyzations here with the big string
     allWords = palabra.split(" ");
-    for(var i = 0; i < allWords.length; i++) {
+
+    // A bit of analysis here
+    for(let i = 0; i < allWords.length; i++) {
         if (allWords[i].includes("↵")) {
             allWords[i].split("↵");
-        } else if (allWords[i] === "") {
+        }
+        if (allWords[i].includes(".")) {
+            allWords[i].split(".");
+        }
+        if (allWords[i] === "" || allWords[i] === "-" || allWords[i] === "+" || allWords[i] === "/") {
             allWords.splice(i, 1);
         }
+        allWords[i].split(/(?=[A-Z])/);
     }
-    console.log(allWords);
+    allWords = allWords.filter(function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+    });
+    findLongestWords();
 }
 
 function findLongestWords() {
-    // Find longest words here
+    console.log("NOW SORTING");
+    allWords.sort(function(a, b) {
+        // ASC  -> a.length - b.length
+        // DESC -> b.length - a.length
+        return b.length - a.length;
+    });
+    let max = 10;
+    for(let i = 0; i < max; i++) {
+        if (allWords[i].length > 13) {
+            max += 1;
+        } else {
+            longestWords.push(allWords[i]);
+        }
+    }
+    console.log(allWords);
+    console.log(longestWords);
+    showTheMortals();
 }
 
-function findAverageWordCount() {
-    //Duh
+function findAverageWordLength() {
+    for(let i = 0; i < allWords.length; i++) {
+        avgWordLength += allWords[i].length;
+    }
+    avgWordLength /= allWords.length;
+    return avgWordLength.toPrecision(3);
 }
 
 function findWordCount() {
-    //duh
+    wordCount = allWords.length;
+    return wordCount;
 }
 
 function showTheMortals() {
-    //lol
+    // Removing Banner
+    let loadingBanner = document.getElementById("banner");
+    loadingBanner.style.display = 'none';
+
+    // Populating words
+    for(let i = 0; i < 10; i++) {
+        let lItem = document.createElement('li');
+        let text = document.createTextNode(longestWords[i].toLowerCase());
+        lItem.appendChild(text);
+        document.getElementById("top").appendChild(lItem);
+    }
+
+    // Setting Word Count
+    document.getElementById("count").innerText = findWordCount().toString();
+
+    // Setting Avg Word Length
+    document.getElementById("length").innerText = findAverageWordLength().toString();
 }
 
 window.onload = function() {
     // document.getElementById('download0').onclick = downloadCheckedLinks;
-    console.log("Did get here");
     chrome.windows.getCurrent(function (currentWindow) {
         chrome.tabs.query({active: true, windowId: currentWindow.id},
             function(activeTabs) {
