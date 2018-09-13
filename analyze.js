@@ -2,9 +2,12 @@ let allWords = [];
 let longestWords = [];
 let avgWordLength = 0;
 
+let loadingBanner = document.getElementById("banner");
 chrome.extension.onMessage.addListener(function(words) {
+    console.log("GOT A RESPONSE");
     // Waiting for the return of the string
     separateTheCrap(words);
+    //loadingBanner.style.display = 'initial';
 });
 
 function removeCodeRef(html){
@@ -12,23 +15,35 @@ function removeCodeRef(html){
     return doc.body.textContent || "";
 }
 
-function separateTheCrap(palabra) {
-    palabra = removeCodeRef(palabra);
-    allWords = palabra.split(" ");
+Object.prototype.in = function() {
+    for(var i = 0; i < arguments.length; i++){
+        if(arguments[i] === this) {
+            return true;
+        }
+    }
+    return false;
+};
 
+function separateTheCrap(palabra) {
+    console.log("HERE");
+    palabra = removeCodeRef(palabra);
+    allWords = palabra.split("\S");
+    console.log("PASSED THE SPLITTING");
     // A bit of analysis here
     for(let i = 0; i < allWords.length; i++) {
-        if (allWords[i].includes("↵")) {
-            allWords[i].split("↵");
-        }
-        if (allWords[i].includes(".")) {
-            allWords[i].split(".");
-        }
-        if (allWords[i] === "" || allWords[i] === "-" || allWords[i] === "+" || allWords[i] === "/") {
+        allWords[i].replace("\W", "");
+        // for(let x = 0; x < allWords[i].length; x++) {
+        //     if(allWords[i].charAt(x).in("'", ".", ":", ",")) {
+        //         allWords[i].charAt(x).splice(x, 2);
+        //     }
+        // }
+        if (allWords[i] === "" || allWords[i] === "-" || allWords[i] === "+" || allWords[i] === "/" || allWords[i] === ",") {
             allWords.splice(i, 1);
         }
-        allWords[i].replace('\'\"', '');
-        allWords[i].split(/(?=[A-Z])/);
+        allWords[i].split("/(?=[A-Z])/");
+        if (allWords[i].includes(" ")) {
+            allWords[i].split(" ");
+        }
     }
     allWords = allWords.filter(function onlyUnique(value, index, self) {
         return self.indexOf(value) === index;
@@ -44,10 +59,14 @@ function findLongestWords() {
     });
     let max = 10;
     for(let i = 0; i < max; i++) {
-        if (allWords[i].length > 13) {
-            max += 1;
+        if (allWords[i]) {
+            if (allWords[i].length > 13) {
+                max += 1;
+            } else {
+                longestWords.push(allWords[i]);
+            }
         } else {
-            longestWords.push(allWords[i]);
+            max += 1;
         }
     }
     showTheMortals();
@@ -62,21 +81,24 @@ function findAverageWordLength() {
 }
 
 function findWordCount() {
-    wordCount = allWords.length;
+    let wordCount = allWords.length;
     return wordCount;
 }
 
 function showTheMortals() {
     // Removing Banner
-    let loadingBanner = document.getElementById("banner");
-    loadingBanner.style.display = 'none';
+    //loadingBanner.style.display = 'none';
 
     // Populating words
+    console.log(longestWords);
     for(let i = 0; i < 10; i++) {
         let lItem = document.createElement('li');
         let text = document.createTextNode(longestWords[i].toLowerCase());
         lItem.appendChild(text);
-        document.getElementById("top").appendChild(lItem);
+        let place = document.getElementById("top");
+        console.log(place);
+        place.appendChild(lItem);
+        //place.insertItemBefore(lItem);
     }
 
     // Setting Word Count
@@ -87,7 +109,6 @@ function showTheMortals() {
 }
 
 window.onload = function() {
-    // document.getElementById('download0').onclick = downloadCheckedLinks;
     chrome.windows.getCurrent(function (currentWindow) {
         chrome.tabs.query({active: true, windowId: currentWindow.id},
             function(activeTabs) {
