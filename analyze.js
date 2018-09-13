@@ -7,7 +7,13 @@ chrome.extension.onMessage.addListener(function(words) {
     separateTheCrap(words);
 });
 
+function removeCodeRef(html){
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || "";
+}
+
 function separateTheCrap(palabra) {
+    palabra = removeCodeRef(palabra);
     allWords = palabra.split(" ");
 
     // A bit of analysis here
@@ -21,6 +27,7 @@ function separateTheCrap(palabra) {
         if (allWords[i] === "" || allWords[i] === "-" || allWords[i] === "+" || allWords[i] === "/") {
             allWords.splice(i, 1);
         }
+        allWords[i].replace('\'\"', '');
         allWords[i].split(/(?=[A-Z])/);
     }
     allWords = allWords.filter(function onlyUnique(value, index, self) {
@@ -30,7 +37,6 @@ function separateTheCrap(palabra) {
 }
 
 function findLongestWords() {
-    console.log("NOW SORTING");
     allWords.sort(function(a, b) {
         // ASC  -> a.length - b.length
         // DESC -> b.length - a.length
@@ -44,8 +50,6 @@ function findLongestWords() {
             longestWords.push(allWords[i]);
         }
     }
-    console.log(allWords);
-    console.log(longestWords);
     showTheMortals();
 }
 
