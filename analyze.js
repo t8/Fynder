@@ -3,8 +3,10 @@ let longestWords = [];
 let avgWordLength = 0;
 
 let loadingBanner = document.getElementById("banner");
+
 chrome.extension.onMessage.addListener(function(words) {
-    console.log("GOT A RESPONSE");
+    //console.log("GOT A RESPONSE");
+    //loadingBanner.innerText = "GOT A RESPONSE";
     // Waiting for the return of the string
     separateTheCrap(words);
     //loadingBanner.style.display = 'initial';
@@ -25,10 +27,8 @@ Object.prototype.in = function() {
 };
 
 function separateTheCrap(palabra) {
-    console.log("HERE");
-    palabra = removeCodeRef(palabra);
+    //palabra = removeCodeRef(palabra);
     allWords = palabra.split("\S");
-    console.log("PASSED THE SPLITTING");
     // A bit of analysis here
     for(let i = 0; i < allWords.length; i++) {
         allWords[i].replace("\W", "");
@@ -87,7 +87,7 @@ function findWordCount() {
 
 function showTheMortals() {
     // Removing Banner
-    //loadingBanner.style.display = 'none';
+    loadingBanner.style.display = 'none';
 
     // Populating words
     console.log(longestWords);
