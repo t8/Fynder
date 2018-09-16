@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	
-    <link rel="stylesheet" href="bulma.css">
+    <link rel="stylesheet" href="../static/css/bulma.css">
 	
 	<style>
 		.logo {
@@ -35,7 +35,7 @@
                 Currently Calculating....
             </div>
             <center>
-                <img class="logo" src="images/logo_128.png">
+                <img class="logo" src="../static/images/logo_128.png">
                 <h1 class="title is-4">Fynder</h1>
                 <hr class="divider" />
             </center>
@@ -61,10 +61,10 @@
                                 <span class="tag">Average Word Length:</span>
                                 <span class="tag is-info" id="length">0</span>
                             </div>
-                            <div class="tags has-addons">
-                                <span class="tag">Estimated Reading Level:</span>
-                                <span class="tag is-success" id="level">0</span>
-                            </div>
+                            <!--<div class="tags has-addons">-->
+                                <!--<span class="tag">Estimated Reading Level:</span>-->
+                                <!--<span class="tag is-success" id="level">0</span>-->
+                            <!--</div>-->
                         </div>
                     </div>
                 </div>
@@ -73,6 +73,7 @@
     </div>
 </div>
 
-<script src="analyze.js"></script>
+<!--<script src="../../analyze.js"></script>-->
+<script src="../analyzations/webAnalyzation.js"></script>
 </body>
 </html>
