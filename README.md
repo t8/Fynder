@@ -23,8 +23,8 @@ A simple Google Chrome Extension that pulls the best vocabulary words on any web
 
 This project includes node dependencies that are not normally compatible with direct web application development. As a way around this, I implemented Browserify, a simple tool to "compile" all dependencies into one JS file to run on the web.
 
-To take advantage of this, any changes you make to the project need to be in the wordAnalyzation.js file. After you finish your edits, `cd` into the `src/analyzations` folder and type:
-```browserfiy wordAnalyzation.js -o webAnalyzation.js```
+To take advantage of this, any changes you make to the project need to be in the nodeAnalysis.js file. After you finish your edits, `cd` into the `src/analyzations` folder and type:
+```browserfiy nodeAnalysis.js -o webAnalysis.js```
 
 This converts the previous file into a JS file to run on the extension.
 
@@ -34,3 +34,5 @@ Any edits to improve the speed, efficiency, or add new features are happily welc
 
 
 (c) 2018 Tate Berenbaum
+
+Special thanks to Marnix Bouhuis
