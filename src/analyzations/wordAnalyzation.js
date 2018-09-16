@@ -1,9 +1,14 @@
-var wd        = require("word-definition");
-var Words	  = require('words.js');
-var Types	  = require('words.js').Types;
-var Strings	  = require('words.js').Strings;
+var wd           = require("word-definition");
+var Words	     = require('words.js');
+var Types	     = require('words.js').Types;
+var Strings	     = require('words.js').Strings;
+const fs         = require('fs');
+// Returns the path to the word list which is separated by `\n`
+const wordListPath = require('word-list');
+const englishWords = fs.readFileSync(wordListPath, 'utf8').split('\n');
 
-var wordList;
+let wordList = [];
+let englishWordList = [];
 let averageWordLength = 0;
 
 // Waiting until a response is given
@@ -58,15 +63,22 @@ function splitWords(str) {
 function checkWords(_call) {
     for(let i = 0; i < wordList.length; i++) {
         if (wordList[i] !== '') {
-            wordList[i] = wordList[i].toLowerCase();
-            wd.getDef(wordList[i], "en", null, function(definition) {
-                console.log(definition);
-                if (definition.definition === "undefined" || definition.definition === "" || definition.definition === null || definition.err === 'a request has failed') {
-                    wordList.splice(i, 1);
-                } else {
-                    console.log(wordList[i]);
-                }
-            });
+            // ----- Old Algorithm ----- //
+            // wordList[i] = wordList[i].toLowerCase();
+            // wd.getDef(wordList[i], "en", null, function(definition) {
+            //     console.log(definition);
+            //     if (definition.definition === "undefined" || definition.definition === "" || definition.definition === null || definition.err === 'a request has failed') {
+            //         wordList.splice(i, 1);
+            //     } else {
+            //         console.log(wordList[i]);
+            //     }
+            // });
+
+            // ----- New Algorithm ----- //
+            let englishWord = searchBinary(wordList[i], englishWords, true);
+            if (englishWord !== wordList[i].toLowerCase()) {
+                wordList[i].splice(i, 1);
+            }
         } else {
             wordList.splice(i, 1);
         }
