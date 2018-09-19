@@ -28,7 +28,7 @@
 	</style>
 </head>
 <body>
-<div class="hero is-light">
+<div class="hero is-light" id="home">
     <div class="hero-body">
         <div class="container">
             <div class="notification is-danger" id="banner">
@@ -69,6 +69,19 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="hero is-light" id="def-panel">
+    <div class="hero-body">
+        <div class="container">
+            <button class="delete" id="back-def"></button>
+            <h1 class="title" id="def-title">(word)</h1>
+            <h2 class="subtitle has-text-grey-dark" id="def-type">(word type)</h2>
+            <p id="def-desc">(definition)</p>
+            <button class="button is-rounded is-primary" id="def-copy">Copy Definition</button>
+            <textarea style="display: none;" id="text-to-copy"></textarea>
         </div>
     </div>
 </div>

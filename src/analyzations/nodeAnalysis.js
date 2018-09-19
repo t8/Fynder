@@ -1,8 +1,8 @@
 var wd           = require("word-definition");
-var Words	     = require('words.js');
-var Types	     = require('words.js').Types;
-var Strings	     = require('words.js').Strings;
-var allEnglishWords = require('./allEnglishWords');
+var Words	     = require("words.js");
+var Types	     = require("words.js").Types;
+var Strings	     = require("words.js").Strings;
+var allEnglishWords = require("./allEnglishWords");
 
 const englishWords = allEnglishWords.getWords;
 
@@ -110,19 +110,46 @@ function orderWords(list) {
 
 
 // Getting rid of script tags
-function removeCodeRef(html){
+function removeCodeRef(html) {
     var doc = new DOMParser().parseFromString(html, 'text/html');
     return doc.body.textContent || "";
 }
 
 // Splitting strings with multiple arguments
-function splitMulti(str, tokens){
+function splitMulti(str, tokens) {
     var tempChar = tokens[0]; // We can use the first token as a temporary join character
     for(var i = 1; i < tokens.length; i++){
         str = str.split(tokens[i]).join(tempChar);
     }
     str = str.split(tempChar);
     return str;
+}
+
+// Returning to menu
+function backToHome() {
+    let button = document.getElementById("back-def");
+    document.getElementById("def-panel").style.display = 'none';
+    document.getElementById("home").style.display = 'initial';
+}
+
+// Allowing user to copy text
+// ----- STILL IN DEVELOPMENT ----- //
+function copyDefinition() {
+    let definition = document.getElementById("def-desc");
+    let area = document.getElementById("text-to-copy");
+    area.innerHTML = definition.innerText;
+    // area.addEventListener('copy', function(){
+    //     document.execCommand('copy');
+    // });
+    // let event = new Event('copy');
+    // area.dispatchEvent(event);
+    chrome.runtime.sendMessage(
+        { method: 'setClipboard', value: area.textContent },
+        function(response) {
+            console.log('extension setClipboard response', response);
+        }
+    );
+    console.log("SUPPOSEDLY COPIED THE TEXT");
 }
 
 
@@ -133,13 +160,19 @@ function splitMulti(str, tokens){
 
 function displayTop(topWords) {
     for(let i = 0; i < topWords.length; i++) {
+        // Creating element
         let lItem = document.createElement('li');
-        let text = document.createTextNode(topWords[i].toLowerCase());
-        lItem.appendChild(text);
+        let lDef = document.createElement('a');
+        lDef.id = "l-"+ i;
+        lDef.onclick = function(){displayDefinition(topWords[i])};
+        let text = document.createTextNode(topWords[i]);
+        lDef.appendChild(text);
+        lItem.appendChild(lDef);
         let place = document.getElementById("top");
         place.appendChild(lItem);
     }
     document.getElementById("banner").style.display = 'none';
+    // displayDefinition(topWords[0]);
 }
 
 function displayWordCount() {
@@ -162,7 +195,24 @@ function displayReadingLevel() {
 }
 
 function displayDefinition(word) {
-
+    // Getting definition
+    wd.getDef(word, "en", {
+        hyperlinks: "html"
+    }, function(definition) {
+        // Populating information
+        document.getElementById("def-title").innerText = word;
+        document.getElementById("def-type").innerHTML = "[" + definition.category + "]";
+        document.getElementById("def-desc").innerHTML = definition.definition;
+        // Setting panel
+        document.getElementById("def-panel").style.display = 'initial';
+        // Removing home
+        document.getElementById("home").style.display = 'none';
+        // Giving back button logic
+        document.getElementById("back-def").onclick = function(){backToHome()};
+        // Allowing user to copy definition
+        // ----- STILL IN DEVELOPMENT ----- //
+        //document.getElementById("def-copy").onclick = function(){copyDefinition()};
+    });
 }
 
 
@@ -180,4 +230,5 @@ window.onload = function() {
                     activeTabs[0].id, {file: 'wordFinder.js', allFrames: true});
             });
     });
+    document.getElementById("def-panel").style.display = 'none';
 };
