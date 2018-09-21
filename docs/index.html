@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fynder</title>
+    <link rel="stylesheet" href="../src/static/css/bulma.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="hero is-fullheight">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title is-1 main-text has-text-right">FYNDER</h1>
+            <div class="divider"></div>
+        </div>
+    </div>
+</div>
+
+<div class="hero is-medium is-light">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-two-thirds">
+                    <h1 class="title">Fynder is built to make your literature life easier. Search websites for the best words with <span class="under">ease</span>.</h1>
+                    <hr />
+                    <h1 class="title">Get meaningful analytics for articles.</h1>
+                </div>
+                <div class="column is-one-third card rounded" style="padding: 30px;">
+                    <center>
+                        <img class="logo" src="../src/static/images/logo_128.png">
+                        <h1 class="title is-4">Fynder</h1>
+                        <hr style="background: transparent;"/>
+                    </center>
+                    <div class="card rounded">
+                        <div class="card-content">
+                            <div class="content">
+                                <h6 class="title is-6">Top Words</h6>
+                                <ul class="list" id="top">
+                                    <li>functionality</li>
+                                    <li>usability</li>
+                                    <li>results</li>
+                                    <li>efficient</li>
+                                    <li>performance</li>
+                                    <li>extension</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="card rounded">
+                        <div class="card-content">
+                            <div class="content">
+                                <h6 class="title is-6">Analytics</h6>
+                                <div class="tags has-addons">
+                                    <span class="tag">Word Count:</span>
+                                    <span class="tag is-primary" id="count">18</span>
+                                </div>
+                                <div class="tags has-addons">
+                                    <span class="tag">Average Word Length:</span>
+                                    <span class="tag is-info" id="length">4.8</span>
+                                </div>
+                                <!--<div class="tags has-addons">-->
+                                <!--<span class="tag">Estimated Reading Level:</span>-->
+                                <!--<span class="tag is-success" id="level">0</span>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hero is-medium">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-two-thirds">
+                    <span class="tag is-medium is-primary is-rounded is-pulled-left is-hidden-mobile" style="margin: 0 25px 3em 0;">New</span>
+                    <span>
+                        <h1 class="title">Find the <span class="under">definition</span> for any word on the list just by clicking on it.</h1>
+                        <h2 class="subtitle is-3">Plus, it's fast and free.</h2>
+                    </span>
+                </div>
+                <div class="column is-one-third card rounded" style="padding: 30px;">
+                    <button class="delete is-pulled-right"></button>
+                    <h1 class="title">Incredible</h1>
+                    <h2 class="subtitle has-text-grey-dark">adjective</h2>
+                    <p id="def-desc">Too implausible to be credible; beyond belief; unbelievable.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hero is-light is-bold is-medium">
+    <div class="hero-body">
+        <div class="container">
+            <img src="../src/static/images/logo_128.png" class="is-pulled-left is-hidden-mobile" style="padding-right: 30px;">
+            <div style="padding-top: 10px;">
+                <h1 class="title is-1">So what are you waiting for?</h1>
+                <h2 class="subtitle is-3">Add Fynder on the <a class="under" href="https://chrome.google.com/webstore/detail/fynder/feicfmdclohfmnlbajhmenfdffhiipif">Chrome Web Store</a></h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section is-hidden-touch">
+    <div class="container">
+        <span>a weekend project by <a class="has-text-primary" href="https://twitter.com/TateBerenbaum">Tate Berenbaum</a></span>
+        <span class="is-pulled-right"><a class="has-text-primary" href="https://github.com/tbaumer22/Fynder"><i class="fab fa-github"></i> See the code</a></span>
+    </div>
+</div>
+<div class="section is-hidden-desktop">
+    <div class="container has-text-centered">
+        <p>a weekend project by <a class="has-text-primary" href="https://twitter.com/TateBerenbaum">Tate Berenbaum</a></p>
+        <hr />
+        <p><a class="has-text-primary" href="https://github.com/tbaumer22/Fynder"><i class="fab fa-github"></i> See the code</a></p>
+    </div>
+</div>
+
+</body>
+</html>

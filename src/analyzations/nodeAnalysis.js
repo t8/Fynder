@@ -201,7 +201,7 @@ function displayDefinition(word) {
     }, function(definition) {
         // Populating information
         document.getElementById("def-title").innerText = word;
-        document.getElementById("def-type").innerHTML = "[" + definition.category + "]";
+        document.getElementById("def-type").innerHTML = definition.category;
         document.getElementById("def-desc").innerHTML = definition.definition;
         // Setting panel
         document.getElementById("def-panel").style.display = 'initial';

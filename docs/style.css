@@ -1,0 +1,49 @@
+.main-text {
+  font-size: 10em !important;
+  background: linear-gradient(330deg, #52FFDC, #8FFFB8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.divider {
+  height: 40px;
+  width: 100%;
+  background-size: cover;
+  background: url(images/background.jpeg) no-repeat fixed;
+}
+
+.under {
+  -webkit-text-decoration: slateblue solid underline;
+  text-decoration: slateblue solid underline;
+  -webkit-text-underline-position: under;
+  text-underline-position: under;
+}
+
+.logo {
+  width: 15%;
+  min-width: 60px;
+}
+.rounded {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+}
+
+.list li {
+  padding-left: 10px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #8FFFB8;
+}
